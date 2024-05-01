@@ -1,12 +1,14 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+import os
 from pymongo import MongoClient
 
 app = FastAPI()
 
+url=os.getenv("MONGODB_URI")
 # Connect to MongoDB
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient(url)
 db = client["SpeechToText"]
 collection = db["Correction"]
 
